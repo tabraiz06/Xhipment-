@@ -12,15 +12,15 @@ const PostList = () => {
   const [editingPost, setEditingPost] = useState(null);
 
   const fetchPosts = async () => {
-   try {
-     const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-     const result = await res.json();
-     if (res.ok) {
-       setPosts(result);
-     }
-   } catch (error) {
-    alert(error.message)
-   }
+    try {
+      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+      const result = await res.json();
+      if (res.ok) {
+        setPosts(result);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   useEffect(() => {
@@ -90,9 +90,12 @@ const PostList = () => {
       <div className="m-4">
         <h1 className="font-bold text-lg">Posts</h1>
       </div>
-      <div className="post flex flex-wrap w-full">
+      <div className="post flex flex-wrap w-full gap-4  ">
         {posts.map((post) => (
-          <div key={post.id} className="card  mb-3 h-[40vh] w-[20vw] gap-4">
+          <div
+            key={post.id}
+            className="card rounded  mb-3 h-[40vh] w-[20vw] gap-4 bg-rose-200 border items-center"
+          >
             <div className="card-body">
               {editingPost && editingPost.id === post.id ? (
                 <>
@@ -130,13 +133,15 @@ const PostList = () => {
                 </>
               ) : (
                 <>
-                  <h5 className="card-title font-bold text-xl">{post.title}</h5>
-                  <p className="card-text">{post.body}</p>
+                  <h5 className="card-title font-bold text-xl text-justify">
+                    {post.title}
+                  </h5>
+                  <p className="card-text text-justify">{post.body}</p>
 
                   <div className="flex justify-around mt-4">
                     <button
                       onClick={() => handleEditPost(post)}
-                      className="btn btn-warning me-2 p-2 bg-blue-500 rounded"
+                      className="btn btn-warning me-2 p-4 bg-blue-500 rounded"
                     >
                       Edit
                     </button>
